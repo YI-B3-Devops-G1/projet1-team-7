@@ -1,0 +1,16 @@
+{
+  "name": "tp2-ananda-david",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "DavidA",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^7.14.0",
+    "redis": "^2.8.0"
+  }
+}

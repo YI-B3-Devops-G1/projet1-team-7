@@ -1,0 +1,45 @@
+version: '3.1'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    depends_on:
+      - api
+    ports:
+      - 3000:3000
+    volumes:
+      - ./docker/nginx/:/etc/nginx/conf.d
+    container_name: nginx
+    hostname: nginx
+  api:
+    build:
+      context: .
+      dockerfile: docker/node/Dockerfile
+    environment:
+      DATABASE_URL: postgres://user:pass@postgres:5432/db
+      NODE_ENV: development
+    volumes:
+      - ./:/home/node/app
+    container_name: api
+#    networks:
+#      - network-db
+#      - network-nodejs
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres
+    ports:
+      - "35432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: db
+
+  redis:
+    image: "redis:alpine"
+
+
