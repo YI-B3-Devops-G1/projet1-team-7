@@ -20,11 +20,12 @@ jobs:
       - image: circleci/node:7.10
     working_directory: ~/tp
     steps:
-      - checkout
       - restore_cache:
-          - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run : echo "run test"
+          keys:
+            - node_modules
+            - v1-dependencies-{{ checksum "package.json" }}
+      - checkout
+      - run: echo "run test"
       - run: npm test
 workflows:
   version: 2
