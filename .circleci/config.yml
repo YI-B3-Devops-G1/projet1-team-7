@@ -22,8 +22,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
+        key:
           - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-{{ checksum "package.json" }}
       - run : echo "run test"
       - run: npm test
 workflows:
