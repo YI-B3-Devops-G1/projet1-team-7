@@ -3,7 +3,6 @@ jobs:
   install:
     docker:
       - image: circleci/node:12
-    working_directory: ~/tp
     steps:
       - checkout
       - restore_cache:
@@ -18,7 +17,6 @@ jobs:
   test:
     docker:
       - image: circleci/node:7.10
-    working_directory: ~/tp
     steps:
       - restore_cache:
           keys:
