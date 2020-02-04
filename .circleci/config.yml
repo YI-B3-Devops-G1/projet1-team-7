@@ -41,12 +41,6 @@ workflows:
   build-master:
     jobs:
       - build:
-          filters:
-            branches:
-              only: *
       - publish-latest:
           requires:
             - build
-          filters:
-            branches:
-              only: *
