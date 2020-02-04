@@ -35,6 +35,7 @@ jobs:
           name: Publish Docker Image to Docker Hub
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker tag $IMAGE_NAME:latest rowix4/$IMAGE_NAME:latest
             docker push rowix4/$IMAGE_NAME:latest
 workflows:
   version: 2
