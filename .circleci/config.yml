@@ -20,6 +20,7 @@ jobs:
     steps:
       - checkout
       - run: echo "run test"
+      - run: "npm install -g mocha"
       - run: npm test
 workflows:
   version: 2
