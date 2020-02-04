@@ -3,7 +3,7 @@
 ## InfoTeam 
 mail: david.anandanadaradja@ynov.com
 
-github​_username: genesisVie le pd
+github​_username: genesisVie
 
 mail: leo.gigant@ynov.com
 
