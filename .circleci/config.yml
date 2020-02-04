@@ -19,8 +19,7 @@ jobs:
       - image: circleci/node:12
     steps:
       - checkout
-      - run: echo "run test"
-      - run: "npm install -g mocha"
+      - run: "sudo npm install -g mocha"
       - run: npm test
 workflows:
   version: 2
