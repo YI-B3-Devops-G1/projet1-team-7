@@ -12,5 +12,8 @@
     "express": "^4.17.1",
     "pg": "^7.14.0",
     "redis": "^2.8.0"
+  },
+  "devDependencies": {
+    "mocha-junit-reporter": "^1.23.3"
   }
 }

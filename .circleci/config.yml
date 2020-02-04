@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:7.10
+      - image: circleci/node:12
     working_directory: ~/tp
     steps:
       - checkout
@@ -15,4 +15,20 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-#      - run: yarn test
+#      - run: npm test
+  test:
+    docker:
+      - image: circleci/node:7.10
+    working_directory: ~/tp
+    steps:
+      - checkout
+      - run : echo "run test"
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+
