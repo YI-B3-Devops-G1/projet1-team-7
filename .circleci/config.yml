@@ -6,21 +6,24 @@ jobs:
     working_directory: ~/tp
     steps:
       - checkout
-#      - restore_cache:
-#          keys:
-#            - v1-dependencies-{{ checksum "package.json" }}
-#            - v1-dependencies-
-      - run: npm install
-#      - save_cache:
-#          paths:
-#            - node_modules
-#          key: v1-dependencies-{{ checksum "package.json" }}
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run: npm ci
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
   test:
     docker:
       - image: circleci/node:7.10
     working_directory: ~/tp
     steps:
       - checkout
+      - restore_cache:
+          - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
       - run : echo "run test"
       - run: npm test
 workflows:
