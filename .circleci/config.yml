@@ -6,6 +6,27 @@ executors:
     docker:
       - image: circleci/buildpack-deps:stretch
 jobs:
+  install:
+    docker:
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run: npm ci
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+  test:
+    docker:
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - run: "sudo npm install -g mocha"
+      - run: npm test
   build:
     executor: docker-publisher
     steps:
@@ -39,9 +60,16 @@ jobs:
             docker push rowix4/$IMAGE_NAME:latest
 workflows:
   version: 2
-  build-master:
+  deploy:
     jobs:
-      - build
+      - install
+      - test:
+          requires:
+            - install
+      - build:
+          requires:
+            - install
+            - test
       - publish-latest:
           requires:
             - build
